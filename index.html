@@ -812,6 +812,185 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/22/archivers/Write-a-Singularity-Recipe/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Zhaoqing Xu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zhaoqing Xu's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/06/22/archivers/Write-a-Singularity-Recipe/" class="post-title-link" itemprop="url">Write a Singularity Recipe</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-06-22 00:00:00" itemprop="dateCreated datePublished" datetime="2018-06-22T00:00:00-04:00">2018-06-22</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-01-17 00:54:32" itemprop="dateModified" datetime="2019-01-17T00:54:32-05:00">2019-01-17</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/GSOC/" itemprop="url" rel="index"><span itemprop="name">GSOC</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>I met singularity when I was doing GSOC task for PaddlePaddle:DeepSpeech. So here I will show you how to build a custom singularity image from scratch.</p>
+<h1 id="What’s-the-Singularity-Recipe"><a href="#What’s-the-Singularity-Recipe" class="headerlink" title="What’s the Singularity Recipe"></a>What’s the Singularity Recipe</h1><p>Firstly, let me briefly summarize what’s the singularity recipe and what would it help? It’s similarly with the shell script or makefile which we write in the linux/unix to help us run linux command automatically. A singularity recipe helps us build the image by running those installing commands in the Singularity Hub environment. For instance, when we add <code>apt install vim</code> in the recipe, it will install the vim for your environment or what we say, your image. So you can always copy all the commands you will do that set up the satisfying environment into the recipe to build an image by uploading it to <a href="https://singularity-hub.org/collections" target="_blank" rel="noopener">Singularity Hub</a>.  </p>
+<h1 id="How-to-write-a-Singularity-Recipe"><a href="#How-to-write-a-Singularity-Recipe" class="headerlink" title="How to write a Singularity Recipe"></a>How to write a Singularity Recipe</h1><p>I think the <a href="https://github.com/singularityhub/singularityhub.github.io/wiki/Build-A-Container" target="_blank" rel="noopener">official docs</a> explained it clearly so I won’t repeat, but pay attention that if you’d like to modify a singularity image or a docker image to fit your demand, (which is very common and recommended), just use:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Bootstrap:docker  </span><br><span class="line">From:ubuntu:latest</span><br></pre></td></tr></table></figure></p>
+<p><code>ubuntu:latest</code> is an example,<br>we could change with:<code>From:paddlepaddle/deep_speech:latest-gpu</code> so that we could inherit all the tools and pacages in that image and  add other tools to help with our project.</p>
+<h1 id="How-to-upload-it"><a href="#How-to-upload-it" class="headerlink" title="How to upload it?"></a>How to upload it?</h1><p>So how could we build our DeepSpeech image to help us with our work? Just as mentioned in the <a href="https://github.com/singularityhub/singularityhub.github.io/wiki/Build-A-Container" target="_blank" rel="noopener">Build the container</a>, we should create a new Github repository, and push the Singularity recipe to the repository, and then we connect the repository with our singularity hub account, and it’s done. Really easy!</p>
+<h1 id="How-to-download-the-image-and-use-it"><a href="#How-to-download-the-image-and-use-it" class="headerlink" title="How to download the image and use it"></a>How to download the image and use it</h1><p>take my image as an example: just run<br><code>singularity pull shub://xuzhaoqing/DeepSpeech</code><br>after we download it correctly, we could jump into the image by typing<br><code>singularity singularity shell -e &lt;image name&gt;</code></p>
+<p>Thanks for your reading! Hope you could get some intuition from this article.</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/22/archivers/Prepare-the-Data/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -944,185 +1123,6 @@
 <p>Here, as you can see, <code>10</code> means the seconds you’d like to split,here I choose <code>10</code></p>
 <p><strong>I have copyed <code>2018-04-30_1100_CN_CCTV1_新闻联播.wav</code> to <code>/mnt/rds/redhen/gallina/Singularity/Zhaoqing/</code> so that any of you could try following the steps</strong></p>
 <h2 id="Next-step"><a href="#Next-step" class="headerlink" title="Next step"></a>Next step</h2><p>There are two parts of tasks for us to solve: one is to test if the data works for the model, the other is to write runscripts to process all the data. We will be in progress soon. Any suggestions? </p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/22/archivers/Write-a-Singularity-Recipe/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Zhaoqing Xu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zhaoqing Xu's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/06/22/archivers/Write-a-Singularity-Recipe/" class="post-title-link" itemprop="url">Write a Singularity Recipe</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-06-22 00:00:00" itemprop="dateCreated datePublished" datetime="2018-06-22T00:00:00-04:00">2018-06-22</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-01-17 00:54:32" itemprop="dateModified" datetime="2019-01-17T00:54:32-05:00">2019-01-17</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/GSOC/" itemprop="url" rel="index"><span itemprop="name">GSOC</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>I met singularity when I was doing GSOC task for PaddlePaddle:DeepSpeech. So here I will show you how to build a custom singularity image from scratch.</p>
-<h1 id="What’s-the-Singularity-Recipe"><a href="#What’s-the-Singularity-Recipe" class="headerlink" title="What’s the Singularity Recipe"></a>What’s the Singularity Recipe</h1><p>Firstly, let me briefly summarize what’s the singularity recipe and what would it help? It’s similarly with the shell script or makefile which we write in the linux/unix to help us run linux command automatically. A singularity recipe helps us build the image by running those installing commands in the Singularity Hub environment. For instance, when we add <code>apt install vim</code> in the recipe, it will install the vim for your environment or what we say, your image. So you can always copy all the commands you will do that set up the satisfying environment into the recipe to build an image by uploading it to <a href="https://singularity-hub.org/collections" target="_blank" rel="noopener">Singularity Hub</a>.  </p>
-<h1 id="How-to-write-a-Singularity-Recipe"><a href="#How-to-write-a-Singularity-Recipe" class="headerlink" title="How to write a Singularity Recipe"></a>How to write a Singularity Recipe</h1><p>I think the <a href="https://github.com/singularityhub/singularityhub.github.io/wiki/Build-A-Container" target="_blank" rel="noopener">official docs</a> explained it clearly so I won’t repeat, but pay attention that if you’d like to modify a singularity image or a docker image to fit your demand, (which is very common and recommended), just use:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Bootstrap:docker  </span><br><span class="line">From:ubuntu:latest</span><br></pre></td></tr></table></figure></p>
-<p><code>ubuntu:latest</code> is an example,<br>we could change with:<code>From:paddlepaddle/deep_speech:latest-gpu</code> so that we could inherit all the tools and pacages in that image and  add other tools to help with our project.</p>
-<h1 id="How-to-upload-it"><a href="#How-to-upload-it" class="headerlink" title="How to upload it?"></a>How to upload it?</h1><p>So how could we build our DeepSpeech image to help us with our work? Just as mentioned in the <a href="https://github.com/singularityhub/singularityhub.github.io/wiki/Build-A-Container" target="_blank" rel="noopener">Build the container</a>, we should create a new Github repository, and push the Singularity recipe to the repository, and then we connect the repository with our singularity hub account, and it’s done. Really easy!</p>
-<h1 id="How-to-download-the-image-and-use-it"><a href="#How-to-download-the-image-and-use-it" class="headerlink" title="How to download the image and use it"></a>How to download the image and use it</h1><p>take my image as an example: just run<br><code>singularity pull shub://xuzhaoqing/DeepSpeech</code><br>after we download it correctly, we could jump into the image by typing<br><code>singularity singularity shell -e &lt;image name&gt;</code></p>
-<p>Thanks for your reading! Hope you could get some intuition from this article.</p>
 
           
         
