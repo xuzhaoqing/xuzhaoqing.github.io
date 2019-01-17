@@ -96,18 +96,18 @@
 
 
 
-  <meta name="description" content="*运算符在python中的解压,传参用法 这两天得了一本《Python Cookbook》，甚是喜爱，希望能记录一点有意思的Python 用法，既是作为自己的读书笔记，让自己能够不断精进技术，也是为了能够和大家一起讨论Python。 从zip说开去*操作符在Python中除了乘法和复制(如[1] * 5)的用法之外，还有解压(unpack)的功能，这应该是所有用过zip()的人都知道的事情。zip">
+  <meta name="description" content="*运算符在python中的解压,传参用法 注:本文首发于我的知乎文章 这两天得了一本《Python Cookbook》，甚是喜爱，希望能记录一点有意思的Python 用法，既是作为自己的读书笔记，让自己能够不断精进技术，也是为了能够和大家一起讨论Python。 从zip说开去*操作符在Python中除了乘法和复制(如[1] * 5)的用法之外，还有解压(unpack)的功能，这应该是所有用过zip">
 <meta name="keywords" content="Natural-Language-Processing Open-Source Reading">
 <meta property="og:type" content="article">
 <meta property="og:title" content="星号运算符在python中的用法">
 <meta property="og:url" content="http://yoursite.com/2019/01/14/*运算符在python中的解压,传参用法/index.html">
 <meta property="og:site_name" content="Zhaoqing Xu&#39;s Blog">
-<meta property="og:description" content="*运算符在python中的解压,传参用法 这两天得了一本《Python Cookbook》，甚是喜爱，希望能记录一点有意思的Python 用法，既是作为自己的读书笔记，让自己能够不断精进技术，也是为了能够和大家一起讨论Python。 从zip说开去*操作符在Python中除了乘法和复制(如[1] * 5)的用法之外，还有解压(unpack)的功能，这应该是所有用过zip()的人都知道的事情。zip">
+<meta property="og:description" content="*运算符在python中的解压,传参用法 注:本文首发于我的知乎文章 这两天得了一本《Python Cookbook》，甚是喜爱，希望能记录一点有意思的Python 用法，既是作为自己的读书笔记，让自己能够不断精进技术，也是为了能够和大家一起讨论Python。 从zip说开去*操作符在Python中除了乘法和复制(如[1] * 5)的用法之外，还有解压(unpack)的功能，这应该是所有用过zip">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-01-17T08:37:23.341Z">
+<meta property="og:updated_time" content="2019-01-17T08:39:04.400Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="星号运算符在python中的用法">
-<meta name="twitter:description" content="*运算符在python中的解压,传参用法 这两天得了一本《Python Cookbook》，甚是喜爱，希望能记录一点有意思的Python 用法，既是作为自己的读书笔记，让自己能够不断精进技术，也是为了能够和大家一起讨论Python。 从zip说开去*操作符在Python中除了乘法和复制(如[1] * 5)的用法之外，还有解压(unpack)的功能，这应该是所有用过zip()的人都知道的事情。zip">
+<meta name="twitter:description" content="*运算符在python中的解压,传参用法 注:本文首发于我的知乎文章 这两天得了一本《Python Cookbook》，甚是喜爱，希望能记录一点有意思的Python 用法，既是作为自己的读书笔记，让自己能够不断精进技术，也是为了能够和大家一起讨论Python。 从zip说开去*操作符在Python中除了乘法和复制(如[1] * 5)的用法之外，还有解压(unpack)的功能，这应该是所有用过zip">
 
 
 
@@ -400,7 +400,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-01-17 03:37:23" itemprop="dateModified" datetime="2019-01-17T03:37:23-05:00">2019-01-17</time>
+                <time title="Modified: 2019-01-17 03:39:04" itemprop="dateModified" datetime="2019-01-17T03:39:04-05:00">2019-01-17</time>
               
             
           </span>
@@ -453,6 +453,7 @@
 
       
         <h1 id="运算符在python中的解压-传参用法"><a href="#运算符在python中的解压-传参用法" class="headerlink" title="*运算符在python中的解压,传参用法"></a>*运算符在python中的解压,传参用法</h1><hr>
+<p>注:本文首发于<a href="https://zhuanlan.zhihu.com/p/54738146" target="_blank" rel="noopener">我的知乎文章</a></p>
 <p>这两天得了一本《Python Cookbook》，甚是喜爱，希望能记录一点有意思的Python 用法，既是作为自己的读书笔记，让自己能够不断精进技术，也是为了能够和大家一起讨论Python。</p>
 <h2 id="从zip说开去"><a href="#从zip说开去" class="headerlink" title="从zip说开去"></a>从zip说开去</h2><p>*操作符在Python中除了乘法和复制(如[1] * 5)的用法之外，还有解压(unpack)的功能，这应该是所有用过zip()的人都知道的事情。zip函数的基本用法如下:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">stuff = [<span class="string">'apple'</span>,<span class="string">'banana'</span>,<span class="string">'peach'</span>]</span><br><span class="line">money = [<span class="number">10</span>, <span class="number">5</span>, <span class="number">7</span>]</span><br><span class="line"></span><br><span class="line">pair = list(zip(stuff,money))</span><br><span class="line"><span class="comment"># pair = [('apple',10),('banana',5),('peach',7)]</span></span><br></pre></td></tr></table></figure>
