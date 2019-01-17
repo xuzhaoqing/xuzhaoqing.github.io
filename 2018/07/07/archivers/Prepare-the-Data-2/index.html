@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=6.7.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.7.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.7.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '6.7.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Here I will write some shell scripts to automatically find all the Chinese videos in the datasets and transform them into the form that could be input in our DeepSpeech2 model. Find the Chinese dataTh">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Prepare the Data 2">
+<meta property="og:url" content="http://yoursite.com/2018/07/07//archivers/Prepare-the-Data-2/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Here I will write some shell scripts to automatically find all the Chinese videos in the datasets and transform them into the form that could be input in our DeepSpeech2 model. Find the Chinese dataTh">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-01-17T05:54:32.387Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Prepare the Data 2">
+<meta name="twitter:description" content="Here I will write some shell scripts to automatically find all the Chinese videos in the datasets and transform them into the form that could be input in our DeepSpeech2 model. Find the Chinese dataTh">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/07/07//archivers/Prepare-the-Data-2/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Prepare the Data 2 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/07/archivers/Prepare-the-Data-2/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Prepare the Data 2
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-07-07 00:00:00" itemprop="dateCreated datePublished" datetime="2018-07-07T00:00:00-04:00">2018-07-07</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-01-17 00:54:32" itemprop="dateModified" datetime="2019-01-17T00:54:32-05:00">2019-01-17</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/GSOC/" itemprop="url" rel="index"><span itemprop="name">GSOC</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Here I will write some shell scripts to automatically find all the Chinese videos in the datasets and transform them into the form that could be input in our DeepSpeech2 model.</p>
+<h2 id="Find-the-Chinese-data"><a href="#Find-the-Chinese-data" class="headerlink" title="Find the Chinese data"></a>Find the Chinese data</h2><p>The data is all stored in the <code>/mnt/rds/redhen/gallina/tv/</code> directory, including English,French,Chinese and so on. To automatically find all the Chinese data from <code>2018-01</code> to <code>2018-06</code>, I write a shell script called <code>extract.sh</code>:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"><span class="built_in">cd</span> /mnt/rds/redhen/gallina/tv/2018</span><br><span class="line"><span class="keyword">for</span> date <span class="keyword">in</span> 2018-0&#123;1,2,3,4,5,6&#125;</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">   <span class="built_in">cd</span> <span class="variable">$date</span></span><br><span class="line">   <span class="keyword">for</span> file <span class="keyword">in</span> `ls`</span><br><span class="line">   <span class="keyword">do</span></span><br><span class="line">        find ./<span class="variable">$file</span> -name <span class="string">'*_CN_*.mp4'</span> -<span class="built_in">exec</span> cp &#123;&#125; /mnt/rds/redhen/gallina/Singularity/data/<span class="variable">$date</span> \;</span><br><span class="line">        <span class="built_in">echo</span> <span class="variable">$file</span></span><br><span class="line">   <span class="keyword">done</span></span><br><span class="line">   <span class="built_in">cd</span> ..</span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"><span class="built_in">exit</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="Change-from-mp4-to-wav"><a href="#Change-from-mp4-to-wav" class="headerlink" title="Change from mp4 to wav"></a>Change from mp4 to wav</h2><p>To get the audio information from the videos, I create a shell script called <code>transform.sh</code>:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"><span class="built_in">cd</span> /mnt/rds/redhen/gallina/Singularity/data</span><br><span class="line"><span class="keyword">for</span> file <span class="keyword">in</span> `ls`</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">  <span class="keyword">if</span> [ <span class="string">"<span class="variable">$file</span>"</span> != <span class="string">"wav"</span> ]</span><br><span class="line">  <span class="keyword">then</span></span><br><span class="line">        <span class="keyword">for</span> mp4 <span class="keyword">in</span> `ls <span class="variable">$file</span>`</span><br><span class="line">        <span class="keyword">do</span></span><br><span class="line">           ffmpeg -i ./<span class="variable">$file</span>/<span class="variable">$mp4</span> wav/<span class="variable">$file</span>/<span class="variable">$&#123;mp4%%.*&#125;</span>.wav</span><br><span class="line">        <span class="keyword">done</span></span><br><span class="line">  <span class="keyword">fi</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line"><span class="comment">## Split the data</span></span><br><span class="line">We have to split them into 10 seconds each to fit the input form. To automatically split them, we could use my shell script `split.sh`:</span><br><span class="line">```bash</span><br><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="built_in">cd</span> /mnt/rds/redhen/gallina/Singularity/data/wav</span><br><span class="line"><span class="built_in">echo</span> <span class="string">'Split Begins'</span></span><br><span class="line"><span class="keyword">for</span> file <span class="keyword">in</span> `ls`</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">   <span class="keyword">for</span> wav <span class="keyword">in</span> `ls <span class="variable">$file</span>`</span><br><span class="line">   <span class="keyword">do</span></span><br><span class="line">        mkdir -p ../split/<span class="variable">$file</span>/<span class="variable">$&#123;wav%%.*&#125;</span></span><br><span class="line">        sox <span class="variable">$file</span>/<span class="variable">$wav</span>  ../split/<span class="variable">$file</span>/<span class="variable">$&#123;wav%%.*&#125;</span>/<span class="variable">$wav</span>  trim 0 10 : newfile : restart \;</span><br><span class="line">        <span class="built_in">echo</span> <span class="variable">$file</span>/<span class="variable">$wav</span><span class="string">' split  done'</span></span><br><span class="line">   <span class="keyword">done</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"><span class="built_in">exit</span></span><br></pre></td></tr></table></figure></p>
+<p>After that, we could find all the data in <code>/mnt/rds/redhen/gallina/Singularity/data/split</code>. all the wav files splitted from one video are placed into one folder with the same name of their video. Take one for example:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line">[zxx302@hpc3 split]$ cd ../data/split</span><br><span class="line">[zxx302@hpc3 split]$ ls</span><br><span class="line">2018-01  2018-02  2018-03  2018-04  2018-05  2018-06</span><br><span class="line">[zxx302@hpc3 split]$ ls 2018-01</span><br><span class="line">2018-01-08_0410_CN_HNTV1_午间新闻</span><br><span class="line">2018-01-09_0410_CN_HNTV1_午间新闻</span><br><span class="line">2018-01-09_1100_CN_CCTV1_新闻联播</span><br><span class="line">2018-01-09_1359_CN_CCTV1_晚间新闻</span><br><span class="line">2018-01-09_1500_CN_CCTV1_24小时</span><br><span class="line">2018-01-09_2033_CN_CCTV13_新闻1+1</span><br><span class="line">2018-01-09_2300_CN_HNCSTV_Changsha_News</span><br><span class="line">2018-01-10_0410_CN_HNTV1_午间新闻</span><br><span class="line">2018-01-10_1100_CN_CCTV1_新闻联播</span><br><span class="line">2018-01-10_1359_CN_CCTV1_晚间新闻</span><br><span class="line">2018-01-10_1500_CN_CCTV1_24小时</span><br><span class="line">2018-01-10_2033_CN_CCTV13_新闻1+1</span><br><span class="line">2018-01-10_2300_CN_HNCSTV_Changsha_News</span><br><span class="line">2018-01-11_0410_CN_HNTV1_午间新闻</span><br><span class="line">...</span><br><span class="line">[zxx302@hpc3 split]$ ls 2018-01/2018-01-26_2033_CN_CCTV13_新闻1+1/</span><br><span class="line">2018-01-26_2033_CN_CCTV13_新闻1+1001.wav  2018-01-26_2033_CN_CCTV13_新闻1+1055.wav  2018-01-26_2033_CN_CCTV13_新闻1+1109.wav</span><br><span class="line">2018-01-26_2033_CN_CCTV13_新闻1+1002.wav  2018-01-26_2033_CN_CCTV13_新闻1+1056.wav  2018-01-26_2033_CN_CCTV13_新闻1+1110.wav</span><br><span class="line">2018-01-26_2033_CN_CCTV13_新闻1+1003.wav  2018-01-26_2033_CN_CCTV13_新闻1+1057.wav  2018-01-26_2033_CN_CCTV13_新闻1+1111.wav</span><br><span class="line">2018-01-26_2033_CN_CCTV13_新闻1+1004.wav  2018-01-26_2033_CN_CCTV13_新闻1+1058.wav  2018-01-26_2033_CN_CCTV13_新闻1+1112.wav</span><br><span class="line">2018-01-26_2033_CN_CCTV13_新闻1+1005.wav  2018-01-26_2033_CN_CCTV13_新闻1+1059.wav  2018-01-26_2033_CN_CCTV13_新闻1+1113.wav</span><br><span class="line">2018-01-26_2033_CN_CCTV13_新闻1+1006.wav  2018-01-26_2033_CN_CCTV13_新闻1+1060.wav  2018-01-26_2033_CN_CCTV13_新闻1+1114.wav</span><br><span class="line">2018-01-26_2033_CN_CCTV13_新闻1+1007.wav  2018-01-26_2033_CN_CCTV13_新闻1+1061.wav  2018-01-26_2033_CN_CCTV13_新闻1+1115.wav</span><br><span class="line">2018-01-26_2033_CN_CCTV13_新闻1+1008.wav  2018-01-26_2033_CN_CCTV13_新闻1+1062.wav  2018-01-26_2033_CN_CCTV13_新闻1+1116.wav</span><br><span class="line">2018-01-26_2033_CN_CCTV13_新闻1+1009.wav  2018-01-26_2033_CN_CCTV13_新闻1+1063.wav  2018-01-26_2033_CN_CCTV13_新闻1+1117.wav</span><br><span class="line">2018-01-26_2033_CN_CCTV13_新闻1+1010.wav  2018-01-26_2033_CN_CCTV13_新闻1+1064.wav  2018-01-26_2033_CN_CCTV13_新闻1+1118.wav</span><br><span class="line">2018-01-26_2033_CN_CCTV13_新闻1+1011.wav  2018-01-26_2033_CN_CCTV13_新闻1+1065.wav  2018-01-26_2033_CN_CCTV13_新闻1+1119.wav</span><br><span class="line">2018-01-26_2033_CN_CCTV13_新闻1+1012.wav  2018-01-26_2033_CN_CCTV13_新闻1+1066.wav  2018-01-26_2033_CN_CCTV13_新闻1+1120.wav</span><br><span class="line">2018-01-26_2033_CN_CCTV13_新闻1+1013.wav  2018-01-26_2033_CN_CCTV13_新闻1+1067.wav  2018-01-26_2033_CN_CCTV13_新闻1+1121.wav</span><br><span class="line">2018-01-26_2033_CN_CCTV13_新闻1+1014.wav  2018-01-26_2033_CN_CCTV13_新闻1+1068.wav  2018-01-26_2033_CN_CCTV13_新闻1+1122.wav</span><br><span class="line">2018-01-26_2033_CN_CCTV13_新闻1+1015.wav  2018-01-26_2033_CN_CCTV13_新闻1+1069.wav  2018-01-26_2033_CN_CCTV13_新闻1+1123.wav</span><br><span class="line">2018-01-26_2033_CN_CCTV13_新闻1+1016.wav  2018-01-26_2033_CN_CCTV13_新闻1+1070.wav  2018-01-26_2033_CN_CCTV13_新闻1+1124.wav</span><br><span class="line">2018-01-26_2033_CN_CCTV13_新闻1+1017.wav  2018-01-26_2033_CN_CCTV13_新闻1+1071.wav  2018-01-26_2033_CN_CCTV13_新闻1+1125.wav</span><br><span class="line">2018-01-26_2033_CN_CCTV13_新闻1+1018.wav  2018-01-26_2033_CN_CCTV13_新闻1+1072.wav  2018-01-26_2033_CN_CCTV13_新闻1+1126.wav</span><br><span class="line">2018-01-26_2033_CN_CCTV13_新闻1+1019.wav  2018-01-26_2033_CN_CCTV13_新闻1+1073.wav  2018-01-26_2033_CN_CCTV13_新闻1+1127.wav</span><br><span class="line">2018-01-26_2033_CN_CCTV13_新闻1+1020.wav  2018-01-26_2033_CN_CCTV13_新闻1+1074.wav  2018-01-26_2033_CN_CCTV13_新闻1+1128.wav</span><br><span class="line">2018-01-26_2033_CN_CCTV13_新闻1+1021.wav  2018-01-26_2033_CN_CCTV13_新闻1+1075.wav  2018-01-26_2033_CN_CCTV13_新闻1+1129.wav</span><br><span class="line">2018-01-26_2033_CN_CCTV13_新闻1+1022.wav  2018-01-26_2033_CN_CCTV13_新闻1+1076.wav  2018-01-26_2033_CN_CCTV13_新闻1+1130.wav</span><br><span class="line">2018-01-26_2033_CN_CCTV13_新闻1+1023.wav  2018-01-26_2033_CN_CCTV13_新闻1+1077.wav  2018-01-26_2033_CN_CCTV13_新闻1+1131.wav</span><br><span class="line">2018-01-26_2033_CN_CCTV13_新闻1+1024.wav  2018-01-26_2033_CN_CCTV13_新闻1+1078.wav  2018-01-26_2033_CN_CCTV13_新闻1+1132.wav</span><br><span class="line">2018-01-26_2033_CN_CCTV13_新闻1+1025.wav  2018-01-26_2033_CN_CCTV13_新闻1+1079.wav  2018-01-26_2033_CN_CCTV13_新闻1+1133.wav</span><br><span class="line">2018-01-26_2033_CN_CCTV13_新闻1+1026.wav  2018-01-26_2033_CN_CCTV13_新闻1+1080.wav  2018-01-26_2033_CN_CCTV13_新闻1+1134.wav</span><br><span class="line">2018-01-26_2033_CN_CCTV13_新闻1+1027.wav  2018-01-26_2033_CN_CCTV13_新闻1+1081.wav  2018-01-26_2033_CN_CCTV13_新闻1+1135.wav</span><br><span class="line">2018-01-26_2033_CN_CCTV13_新闻1+1028.wav  2018-01-26_2033_CN_CCTV13_新闻1+1082.wav  2018-01-26_2033_CN_CCTV13_新闻1+1136.wav</span><br><span class="line">2018-01-26_2033_CN_CCTV13_新闻1+1029.wav  2018-01-26_2033_CN_CCTV13_新闻1+1083.wav  2018-01-26_2033_CN_CCTV13_新闻1+1137.wav</span><br><span class="line">2018-01-26_2033_CN_CCTV13_新闻1+1030.wav  2018-01-26_2033_CN_CCTV13_新闻1+1084.wav  2018-01-26_2033_CN_CCTV13_新闻1+1138.wav</span><br><span class="line">2018-01-26_2033_CN_CCTV13_新闻1+1031.wav  2018-01-26_2033_CN_CCTV13_新闻1+1085.wav  2018-01-26_2033_CN_CCTV13_新闻1+1139.wav</span><br><span class="line">2018-01-26_2033_CN_CCTV13_新闻1+1032.wav  2018-01-26_2033_CN_CCTV13_新闻1+1086.wav  2018-01-26_2033_CN_CCTV13_新闻1+1140.wav</span><br><span class="line">2018-01-26_2033_CN_CCTV13_新闻1+1033.wav  2018-01-26_2033_CN_CCTV13_新闻1+1087.wav  2018-01-26_2033_CN_CCTV13_新闻1+1141.wav</span><br><span class="line">2018-01-26_2033_CN_CCTV13_新闻1+1034.wav  2018-01-26_2033_CN_CCTV13_新闻1+1088.wav  2018-01-26_2033_CN_CCTV13_新闻1+1142.wav</span><br><span class="line">2018-01-26_2033_CN_CCTV13_新闻1+1035.wav  2018-01-26_2033_CN_CCTV13_新闻1+1089.wav  2018-01-26_2033_CN_CCTV13_新闻1+1143.wav</span><br><span class="line">2018-01-26_2033_CN_CCTV13_新闻1+1036.wav  2018-01-26_2033_CN_CCTV13_新闻1+1090.wav  2018-01-26_2033_CN_CCTV13_新闻1+1144.wav</span><br><span class="line">2018-01-26_2033_CN_CCTV13_新闻1+1037.wav  2018-01-26_2033_CN_CCTV13_新闻1+1091.wav  2018-01-26_2033_CN_CCTV13_新闻1+1145.wav</span><br><span class="line">2018-01-26_2033_CN_CCTV13_新闻1+1038.wav  2018-01-26_2033_CN_CCTV13_新闻1+1092.wav  2018-01-26_2033_CN_CCTV13_新闻1+1146.wav</span><br><span class="line">2018-01-26_2033_CN_CCTV13_新闻1+1039.wav  2018-01-26_2033_CN_CCTV13_新闻1+1093.wav  2018-01-26_2033_CN_CCTV13_新闻1+1147.wav</span><br><span class="line">2018-01-26_2033_CN_CCTV13_新闻1+1040.wav  2018-01-26_2033_CN_CCTV13_新闻1+1094.wav  2018-01-26_2033_CN_CCTV13_新闻1+1148.wav</span><br><span class="line">2018-01-26_2033_CN_CCTV13_新闻1+1041.wav  2018-01-26_2033_CN_CCTV13_新闻1+1095.wav  2018-01-26_2033_CN_CCTV13_新闻1+1149.wav</span><br><span class="line">2018-01-26_2033_CN_CCTV13_新闻1+1042.wav  2018-01-26_2033_CN_CCTV13_新闻1+1096.wav  2018-01-26_2033_CN_CCTV13_新闻1+1150.wav</span><br><span class="line">2018-01-26_2033_CN_CCTV13_新闻1+1043.wav  2018-01-26_2033_CN_CCTV13_新闻1+1097.wav  2018-01-26_2033_CN_CCTV13_新闻1+1151.wav</span><br><span class="line">2018-01-26_2033_CN_CCTV13_新闻1+1044.wav  2018-01-26_2033_CN_CCTV13_新闻1+1098.wav  2018-01-26_2033_CN_CCTV13_新闻1+1152.wav</span><br><span class="line">2018-01-26_2033_CN_CCTV13_新闻1+1045.wav  2018-01-26_2033_CN_CCTV13_新闻1+1099.wav  2018-01-26_2033_CN_CCTV13_新闻1+1153.wav</span><br><span class="line">2018-01-26_2033_CN_CCTV13_新闻1+1046.wav  2018-01-26_2033_CN_CCTV13_新闻1+1100.wav  2018-01-26_2033_CN_CCTV13_新闻1+1154.wav</span><br><span class="line">2018-01-26_2033_CN_CCTV13_新闻1+1047.wav  2018-01-26_2033_CN_CCTV13_新闻1+1101.wav  2018-01-26_2033_CN_CCTV13_新闻1+1155.wav</span><br><span class="line">2018-01-26_2033_CN_CCTV13_新闻1+1048.wav  2018-01-26_2033_CN_CCTV13_新闻1+1102.wav  2018-01-26_2033_CN_CCTV13_新闻1+1156.wav</span><br><span class="line">2018-01-26_2033_CN_CCTV13_新闻1+1049.wav  2018-01-26_2033_CN_CCTV13_新闻1+1103.wav  2018-01-26_2033_CN_CCTV13_新闻1+1157.wav</span><br><span class="line">2018-01-26_2033_CN_CCTV13_新闻1+1050.wav  2018-01-26_2033_CN_CCTV13_新闻1+1104.wav  2018-01-26_2033_CN_CCTV13_新闻1+1158.wav</span><br><span class="line">2018-01-26_2033_CN_CCTV13_新闻1+1051.wav  2018-01-26_2033_CN_CCTV13_新闻1+1105.wav  2018-01-26_2033_CN_CCTV13_新闻1+1159.wav</span><br><span class="line">2018-01-26_2033_CN_CCTV13_新闻1+1052.wav  2018-01-26_2033_CN_CCTV13_新闻1+1106.wav  2018-01-26_2033_CN_CCTV13_新闻1+1160.wav</span><br><span class="line">2018-01-26_2033_CN_CCTV13_新闻1+1053.wav  2018-01-26_2033_CN_CCTV13_新闻1+1107.wav  2018-01-26_2033_CN_CCTV13_新闻1+1161.wav</span><br><span class="line">2018-01-26_2033_CN_CCTV13_新闻1+1054.wav  2018-01-26_2033_CN_CCTV13_新闻1+1108.wav  2018-01-26_2033_CN_CCTV13_新闻1+1162.wav</span><br></pre></td></tr></table></figure></p>
+<p>Thus, we have done all the preparation. The next step is to infer the results from our model. Due to some CUDA problems, It’s still on the progress. Thanks for your reading!</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/22/archivers/Prepare-the-Data/" rel="next" title="Prepare the Data">
+                <i class="fa fa-chevron-left"></i> Prepare the Data
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/08/14/archivers/GSOC-Final-Submission/" rel="prev" title="GSOC Final Submission">
+                GSOC Final Submission <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">categories</span>
+                  
+                </div>
+              
+
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Find-the-Chinese-data"><span class="nav-number">1.</span> <span class="nav-text">Find the Chinese data</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Change-from-mp4-to-wav"><span class="nav-number">2.</span> <span class="nav-text">Change from mp4 to wav</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v6.7.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=6.7.0"></script>
+
+  <script src="/js/src/motion.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/schemes/muse.js?v=6.7.0"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/js/src/post-details.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=6.7.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.7.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.7.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '6.7.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="I have finished the GSOC journey during the last 3 months. Thanks for the help from Prof. Francis Steen and Prof. Mark Turner and all the people from Red Hen Lab who helped me overcome so many problem">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GSOC Final Submission">
+<meta property="og:url" content="http://yoursite.com/2018/08/14//archivers/GSOC-Final-Submission/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="I have finished the GSOC journey during the last 3 months. Thanks for the help from Prof. Francis Steen and Prof. Mark Turner and all the people from Red Hen Lab who helped me overcome so many problem">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-01-17T05:54:32.415Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="GSOC Final Submission">
+<meta name="twitter:description" content="I have finished the GSOC journey during the last 3 months. Thanks for the help from Prof. Francis Steen and Prof. Mark Turner and all the people from Red Hen Lab who helped me overcome so many problem">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/08/14//archivers/GSOC-Final-Submission/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>GSOC Final Submission | Hexo</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/14/archivers/GSOC-Final-Submission/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">GSOC Final Submission
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-08-14 00:00:00" itemprop="dateCreated datePublished" datetime="2018-08-14T00:00:00-04:00">2018-08-14</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-01-17 00:54:32" itemprop="dateModified" datetime="2019-01-17T00:54:32-05:00">2019-01-17</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/GSOC/" itemprop="url" rel="index"><span itemprop="name">GSOC</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>I have finished the GSOC journey during the last 3 months. Thanks for the help from Prof. Francis Steen and Prof. Mark Turner and all the people from Red Hen Lab who helped me overcome so many problems and difficulties. By the end of the program, I build up a Chinese Pipeline which could extract the text from the videos(offered by Red Hen Lab, mostly Chinese news) automatically so that we could do natural language processing tasks afterwards. Technically, I learned HPC, singularity and all the container concepts, how to set up a singularity environment via recipe, how to write shell scripts, how to organize an open source project and some more details about the implementation of DeepSpeech2 from Baidu.</p>
+<h2 id="Some-Links-about-my-work"><a href="#Some-Links-about-my-work" class="headerlink" title="Some Links about my work"></a>Some Links about my work</h2><ul>
+<li>Github: <a href="https://github.com/RedHenLab/ASR-for-Chinese-Pipeline" target="_blank" rel="noopener">https://github.com/RedHenLab/ASR-for-Chinese-Pipeline</a></li>
+<li>Red Hen Lab page: <a href="http://www.redhenlab.org/home/the-cognitive-core-research-topics-in-red-hen/chinese-pipeline" target="_blank" rel="noopener">http://www.redhenlab.org/home/the-cognitive-core-research-topics-in-red-hen/chinese-pipeline</a></li>
+<li>My personal website: xuzhaoqing.github.io</li>
+</ul>
+<h2 id="Introduction-about-Chinese-Pipeline"><a href="#Introduction-about-Chinese-Pipeline" class="headerlink" title="Introduction about Chinese Pipeline"></a>Introduction about Chinese Pipeline</h2><p>My project is to implement a pipeline to extract the text of the voices in the videos(mostly Chinese TV news) from Red Hen Lab. The task is most related to Autimatic Speech Recognition.  </p>
+<h2 id="What-I-have-done"><a href="#What-I-have-done" class="headerlink" title="What I have done"></a>What I have done</h2><ul>
+<li>I read all of the paper and codes in Baidu Deepspeech2 in detail and use part of their tools and pretrained models to fit our needs. You could go here to see their incredible work: <a href="https://github.com/PaddlePaddle/DeepSpeech#questions-and-help" target="_blank" rel="noopener">Deepspeech2</a></li>
+<li>I got used to using singularity and upload the image that we use to singularity hub: <a href="https://www.singularity-hub.org/collections/1174" target="_blank" rel="noopener">image</a> so that everyone, no matter if they were in Red Hen Lab or not, could use this image to do their ASR tasks following our instructions. To know the differences between singularity,docker and shifter, here is a great article: <a href="http://geekyap.blogspot.com/2016/11/docker-vs-singularity-vs-shifter-in-hpc.html" target="_blank" rel="noopener">http://geekyap.blogspot.com/2016/11/docker-vs-singularity-vs-shifter-in-hpc.html</a></li>
+<li>I did the preprocessing of our data, including convert videos to audios, spliting them, resampling and so on. You could check <a href="https://xuzhaoqing.github.io/archivers/Prepare-the-Data" target="_blank" rel="noopener">Prepare the data I</a> and <a href="https://xuzhaoqing.github.io/archivers/Prepare-the-Data-2" target="_blank" rel="noopener">Prepare the data II</a> to see the details.</li>
+<li>After that, I first experimented the project on a video so that I could write the python code, shell scripts and parameters tuning. It cost me a lot of time and you could see the result in the <code>example/output/1.txt</code>   </li>
+<li>After that, I put it into production with all of our data available, a little of change on code could satisfy your requirement for your task. You could see the main implementation in <code>code</code> folder.</li>
+<li>Finally, I write all the docs, wikis and comments of the code.</li>
+</ul>
+<h2 id="To-be-continued"><a href="#To-be-continued" class="headerlink" title="To be continued"></a>To be continued</h2><ul>
+<li>Currently the code in real production is not efficient. I have to implement <code>monitor-new-data</code> function for it, and mutli-thread techniques will help me save a lot of time.</li>
+<li>Use the data to do some easy nlp tasks like word segmentation, word counts and so on. It would be easily done in 1 or 2 days.</li>
+<li>aligments would be a nice task to try.</li>
+</ul>
+<h2 id="Reproduce-my-work"><a href="#Reproduce-my-work" class="headerlink" title="Reproduce my work"></a>Reproduce my work</h2><h3 id="Get-into-the-server"><a href="#Get-into-the-server" class="headerlink" title="Get into the server"></a>Get into the server</h3><p><code>only for people in Red Hen Lab</code> But if you have a similiar HPC environment, it’s still useful for you to know.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">module load singularity/2.5.1</span><br><span class="line">module load cuda/7.5</span><br><span class="line">export SINGULARITY_BINDPATH=&quot;/mnt&quot;</span><br><span class="line">srun -p gpu -C gpup100 --mem=100gb --gres=gpu:2 --pty bash</span><br><span class="line">cd /mnt/rds/redhen/gallina/Singularity/Chinese_Pipeline</span><br><span class="line">singularity shell -e --nv Chinese_Pipeline.simg</span><br></pre></td></tr></table></figure></p>
+<p>or if you don’t want to know the details and just want to check our work, just check <code>/mnt/rds/redhen/gallina/Singularity/Chinese_Pipeline/srun.out</code></p>
+<h3 id="The-Example"><a href="#The-Example" class="headerlink" title="The Example"></a>The Example</h3><p>Before we really put it into production, let’s look at an example to see how it works clearly.<br>Firstly, let’s get into the <code>example</code> folder:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd example</span><br></pre></td></tr></table></figure></p>
+<p>here we can find a mini structure of our program(or actually the core of our program):<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[zxx302@hpc3 example]$ ls</span><br><span class="line">compute_mean.sh      EX.wav       manifest.py   params.tar.gz</span><br><span class="line">compute_mean_std.py  infer.py     mean_std.npz  split</span><br><span class="line">data_utils           infer.sh     model_utils   utils</span><br><span class="line">decoders             manifest.ex  output        vocab.txt</span><br></pre></td></tr></table></figure></p>
+<p>You could find a detailed explanation of these files in:</p>
+<p>Here let’s just see the result:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[zxx302@hpc3 example]$ vim output/1.txt</span><br><span class="line">一二一运动与人文文</span><br><span class="line">名人名言</span><br><span class="line">对公众网上和上行今年十一月二十号五十六有小雨今天是二十世纪中的行为受</span><br><span class="line">美国的一年节目的主要有中共中央召开党外人士座谈会征求对中共中央关于修改宪法部分内</span><br><span class="line">容的</span><br><span class="line">一天习近平主持并发表重要讲话张德江俞正声李战书汪洋蒙古民主席写报道在一</span><br><span class="line">新时代通过合作社会主义思想的影响今天来看贫困县最多的云南省是有中国百姓新的透明质</span><br><span class="line">感空间感</span><br><span class="line">确保给群众出摆脱贫困实现共同和分别是创新方法防治大气污染南京市吸纳顶尖人才抢占战</span><br><span class="line">科技制高点系列报道也时代新气象新作为影片提供机构的炮击是美国支持在叙利亚会的无声</span><br><span class="line">人民保护部队叙利亚政府警告方抚养条件美国国会参议院未能通过联保证处理事故美国联保</span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
+<p>We can see that even there are several typos here, it’s still above the average.</p>
+<h3 id="The-results"><a href="#The-results" class="headerlink" title="The results"></a>The results</h3><p>You could find the results of ASR in the <code>text</code> folder under the <code>Chinese_Pipeline</code>. It’s the output by executing <code>code/infer.sh</code>.</p>
+<h2 id="Acknowledgement"><a href="#Acknowledgement" class="headerlink" title="Acknowledgement"></a>Acknowledgement</h2><p>Here I would like to thank all of the support and help from my mentors in Red Hen Lab, especially Prof.Steen and Prof.Turner. They give me consistent support along the summer. </p>
+<p>And I would like to thank Baidu for their kindness to open source such a great tool for us to use as well as give a clear documentation.</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/07/archivers/Prepare-the-Data-2/" rel="next" title="Prepare the Data 2">
+                <i class="fa fa-chevron-left"></i> Prepare the Data 2
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/12/hello-world/" rel="prev" title="Hello World">
+                Hello World <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">categories</span>
+                  
+                </div>
+              
+
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Some-Links-about-my-work"><span class="nav-number">1.</span> <span class="nav-text">Some Links about my work</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-about-Chinese-Pipeline"><span class="nav-number">2.</span> <span class="nav-text">Introduction about Chinese Pipeline</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#What-I-have-done"><span class="nav-number">3.</span> <span class="nav-text">What I have done</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#To-be-continued"><span class="nav-number">4.</span> <span class="nav-text">To be continued</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reproduce-my-work"><span class="nav-number">5.</span> <span class="nav-text">Reproduce my work</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Get-into-the-server"><span class="nav-number">5.1.</span> <span class="nav-text">Get into the server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#The-Example"><span class="nav-number">5.2.</span> <span class="nav-text">The Example</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#The-results"><span class="nav-number">5.3.</span> <span class="nav-text">The results</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Acknowledgement"><span class="nav-number">6.</span> <span class="nav-text">Acknowledgement</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v6.7.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=6.7.0"></script>
+
+  <script src="/js/src/motion.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/schemes/muse.js?v=6.7.0"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/js/src/post-details.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
