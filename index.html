@@ -286,6 +286,183 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/17/*运算符在python中的解压、传参用法/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Zhaoqing Xu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zhaoqing Xu's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/01/17/*运算符在python中的解压、传参用法/" class="post-title-link" itemprop="url">Untitled</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-01-17 02:11:02 / Modified: 02:10:28" itemprop="dateCreated datePublished" datetime="2019-01-17T02:11:02-05:00">2019-01-17</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="运算符在python中的解压、传参用法"><a href="#运算符在python中的解压、传参用法" class="headerlink" title="* 运算符在python中的解压、传参用法"></a>* 运算符在python中的解压、传参用法</h1><p>这两天得了一本《Python Cookbook》，甚是喜爱，希望能记录一点有意思的Python 用法，既是作为自己的读书笔记，让自己能够不断精进技术，也是为了能够和大家一起讨论Python。</p>
+<h2 id="从zip说开去"><a href="#从zip说开去" class="headerlink" title="从zip说开去"></a>从zip说开去</h2><p>*操作符在Python中除了乘法和复制(如[1] * 5)的用法之外，还有解压(unpack)的功能，这应该是所有用过zip()的人都知道的事情。zip函数的基本用法如下:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">stuff = [<span class="string">'apple'</span>,<span class="string">'banana'</span>,<span class="string">'peach'</span>]</span><br><span class="line">money = [<span class="number">10</span>, <span class="number">5</span>, <span class="number">7</span>]</span><br><span class="line"></span><br><span class="line">pair = list(zip(stuff,money))</span><br><span class="line"><span class="comment"># pair = [('apple',10),('banana',5),('peach',7)]</span></span><br></pre></td></tr></table></figure>
+<p>但是如果我们现在已经有 pair 这个 list 了，希望能够还原成stuff 和 money 两个 list,我们就需要用到*符号:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stuff,money = zip(*pair)</span><br></pre></td></tr></table></figure></p>
+<p>在这里*就起到了解压的效果</p>
+<h2 id="对于迭代对象的作用"><a href="#对于迭代对象的作用" class="headerlink" title="*对于迭代对象的作用"></a>*对于迭代对象的作用</h2><p>当然了，*并不是说只能与 zip() 联合使用，事实上，任何一个函数都可以用到*符号，只要它操作的对象是可迭代的:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">do_something</span><span class="params">(x,y,z)</span>:</span></span><br><span class="line">    print(<span class="string">'x is '</span>, x)</span><br><span class="line">    print(<span class="string">'y is '</span>, y)</span><br><span class="line">    print(<span class="string">'z is '</span>, z)</span><br><span class="line">    </span><br><span class="line">list1 = [<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>]</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>do_something(list1)</span><br><span class="line">Trackback (most recent call last):</span><br><span class="line">   File <span class="string">"&lt;stdin&gt;"</span>, line1, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">TypeError: do() missing <span class="number">2</span> required positional arguments: <span class="string">'y'</span> <span class="keyword">and</span> <span class="string">'z'</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>do_something(*list1)</span><br><span class="line">x <span class="keyword">is</span> a</span><br><span class="line">y <span class="keyword">is</span> b</span><br><span class="line">z <span class="keyword">is</span> c</span><br></pre></td></tr></table></figure></p>
+<p>可知，<code>*</code>操作符自动将 list1 中的元素赋给了三个形参，这就是<code>*</code>很方便的用法</p>
+<h2 id="的用法"><a href="#的用法" class="headerlink" title="**的用法"></a>**的用法</h2><p>当然，对于字典(dict)来说，我们也可以使用<code>*</code>运算符:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">dict1 = &#123;<span class="string">'x'</span>:<span class="number">1</span>, <span class="string">'y'</span>:<span class="number">2</span>, <span class="string">'z'</span>:<span class="number">3</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>do_something(*dict1)</span><br><span class="line">x <span class="keyword">is</span> x</span><br><span class="line">y <span class="keyword">is</span> y</span><br><span class="line">z <span class="keyword">is</span> z</span><br></pre></td></tr></table></figure></p>
+<p>但是这样子得到的是 key 值，如果想要得到 value 值，我们需要使用<code>**</code>运算符:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>do_somthing(**dict1)</span><br><span class="line">x <span class="keyword">is</span> <span class="number">1</span></span><br><span class="line">y <span class="keyword">is</span> <span class="number">2</span></span><br><span class="line">z <span class="keyword">is</span> <span class="number">3</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>一定要注意的是，此处的用法必须要求函数形参与字典 key 值一一对应</strong>，请看下面的用法:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">dict2 = &#123;<span class="string">'z'</span>:<span class="number">1</span>, <span class="string">'x'</span>:<span class="number">2</span>, <span class="string">'y'</span>:<span class="number">3</span>&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>do_something(**dict2)</span><br><span class="line">x <span class="keyword">is</span> <span class="number">2</span></span><br><span class="line">y <span class="keyword">is</span> <span class="number">3</span></span><br><span class="line">z <span class="keyword">is</span> <span class="number">1</span></span><br><span class="line"></span><br><span class="line">dict3 = &#123;<span class="string">'a'</span>:<span class="number">1</span>, <span class="string">'b'</span>:<span class="number">2</span>, <span class="string">'c'</span>:<span class="number">3</span>&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>do_something(**dict3)</span><br><span class="line"><span class="comment"># TypeError: do_something() missing 1 required positional argument: 'x'</span></span><br></pre></td></tr></table></figure></p>
+<p>实际上，<code>**</code>的用法应该这么理解:</p>
+<pre><code>**dict2 等效于 z=1, x=2, y=3， 因此 do_something(**dict2) 等效于 do_something(z=1, x=2, y=3), 这样看来，dict3的错误就是必然的了，因为函数没有 a 这个参数
+</code></pre><p>为了加深理解，请看下面这条例子(来自Reference 2):<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>date_info = &#123;<span class="string">'year'</span>: <span class="string">"2020"</span>, <span class="string">'month'</span>: <span class="string">"01"</span>, <span class="string">'day'</span>: <span class="string">"01"</span>&#125; </span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>filename = <span class="string">"&#123;year&#125;-&#123;month&#125;-&#123;day&#125;.txt"</span>.format(**date_info) </span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>filename</span><br><span class="line"><span class="string">'2020-01-01.txt'</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="理解-args-和-kwargs"><a href="#理解-args-和-kwargs" class="headerlink" title="理解 *args 和**kwargs"></a>理解 <code>*args</code> 和<code>**kwargs</code></h2><p><code>*args</code>和<code>**kwargs</code>是我们经常见到的两个参数，但这两个参数究竟是干什么的可能有些人仍有疑惑。其实它们的用法也很简单，对于一个函数而言，如果你不确定它还有什么待传入的参数，就不妨用一个<code>*args</code>(当然你不一定非得叫<code>args</code>，但一般都喜欢起这个名字)，它将输入的多余形参以元组形式保存在<code>args</code>中:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#两个数的加法</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">adder_2</span><span class="params">(x,y)</span>:</span></span><br><span class="line">  <span class="keyword">return</span> x+y</span><br><span class="line"></span><br><span class="line"><span class="comment">#三个数的加法</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">adder_3</span><span class="params">(x,y,z)</span>:</span></span><br><span class="line">  <span class="keyword">return</span> x+y+z</span><br><span class="line"></span><br><span class="line"><span class="comment"># 无限个数的加法</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">adder_unlimited</span><span class="params">(*args)</span>:</span></span><br><span class="line">   result = <span class="number">0</span></span><br><span class="line">   <span class="keyword">for</span> num <span class="keyword">in</span> args:</span><br><span class="line">       result += num</span><br><span class="line">   <span class="keyword">return</span> result</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>adder_unlimited(<span class="number">1</span>)</span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>adder_unlimited(<span class="number">1</span>,<span class="number">2</span>)</span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>adder_unlimited(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>)</span><br><span class="line"><span class="number">10</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>list_num = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>adder_unlimited(*list_num)  <span class="comment">#活学活用</span></span><br><span class="line"><span class="number">10</span></span><br></pre></td></tr></table></figure></p>
+<p><code>**kwargs</code>效果则是将输入的未定义的形参及其对应的值存在<code>kwargs</code>字典里(例子来源Reference 4):<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">intro</span><span class="params">(**data)</span>:</span></span><br><span class="line">    print(<span class="string">"\nData type of argument:"</span>,type(data))</span><br><span class="line">    <span class="keyword">for</span> key, value <span class="keyword">in</span> data.items():</span><br><span class="line">        print(<span class="string">"&#123;&#125; is &#123;&#125;"</span>.format(key,value))</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>intro(Firstname=<span class="string">"Sita"</span>, Lastname=<span class="string">"Sharma"</span>, Age=<span class="number">22</span>, Phone=<span class="number">1234567890</span>)</span><br><span class="line"></span><br><span class="line">Data type of argument: &lt;<span class="class"><span class="keyword">class</span> '<span class="title">dict</span>'&gt;</span></span><br><span class="line"><span class="class"><span class="title">Firstname</span> <span class="title">is</span> <span class="title">Sita</span></span></span><br><span class="line"><span class="class"><span class="title">Lastname</span> <span class="title">is</span> <span class="title">Sharma</span></span></span><br><span class="line"><span class="class"><span class="title">Age</span> <span class="title">is</span> 22</span></span><br><span class="line"><span class="class"><span class="title">Phone</span> <span class="title">is</span> 1234567890</span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class">&gt;&gt;&gt; <span class="title">intro</span><span class="params">(Firstname=<span class="string">"John"</span>, Lastname=<span class="string">"Wood"</span>, Email=<span class="string">"johnwood@nomail.com"</span>, Country=<span class="string">"Wakanda"</span>, Age=<span class="number">25</span>, Phone=<span class="number">9876543210</span>)</span></span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class"><span class="title">Data</span> <span class="title">type</span> <span class="title">of</span> <span class="title">argument</span>:</span> &lt;<span class="class"><span class="keyword">class</span> '<span class="title">dict</span>'&gt;</span></span><br><span class="line"><span class="class"><span class="title">Firstname</span> <span class="title">is</span> <span class="title">John</span></span></span><br><span class="line"><span class="class"><span class="title">Lastname</span> <span class="title">is</span> <span class="title">Wood</span></span></span><br><span class="line"><span class="class"><span class="title">Email</span> <span class="title">is</span> <span class="title">johnwood</span>@<span class="title">nomail</span>.<span class="title">com</span></span></span><br><span class="line"><span class="class"><span class="title">Country</span> <span class="title">is</span> <span class="title">Wakanda</span></span></span><br><span class="line"><span class="class"><span class="title">Age</span> <span class="title">is</span> 25</span></span><br><span class="line"><span class="class"><span class="title">Phone</span> <span class="title">is</span> 9876543210</span></span><br></pre></td></tr></table></figure></p>
+<p>因此，对于一个好的 API 来说，应该尽量使用<code>*args</code>和<code>**kwargs</code>以提高程序稳定性</p>
+<h2 id="利用-从可迭代对象中分解元素"><a href="#利用-从可迭代对象中分解元素" class="headerlink" title="利用*从可迭代对象中分解元素"></a>利用*从可迭代对象中分解元素</h2><p>说了这么多终于说到了《Python Cookbook》中的内容了(内心OS:累死我了)。 假设我们现在要对一个歌手的表现打分，去掉一个最高分，去掉一个最低分，对其他所有分数（未知个数）求平均分，这时<code>*</code>方法就派上用场了:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">drop_first_last</span><span class="params">(grades)</span>:</span></span><br><span class="line">   first, *middle, last = grades</span><br><span class="line">   <span class="keyword">return</span> avg(middle)</span><br></pre></td></tr></table></figure></p>
+<p> 也许你会说，用切片也可以达到同样效果，如<code>middle = grades[1:-1]</code>，但如果我们需要用到<code>first</code>和<code>last</code>呢？你是不是还要<code>first = grades[0]</code>和<code>last = grades[-1]</code>呢？ 太不优雅了！ 事实上，下面这个例子如果用切片来写就十分麻烦(来源 Reference 3):</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;line = <span class="string">'nobody:*:-2:-2:Unprevileged User:/var/empty:/usr/bin/false'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>uname,*_, homedir, sh = line.split(<span class="string">':'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>uname</span><br><span class="line"><span class="string">'nobody'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>homedir</span><br><span class="line"><span class="string">'/var/empty'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sh</span><br><span class="line"><span class="string">'/usr/bin/false'</span></span><br></pre></td></tr></table></figure>
+<p>其中<code>*_</code>将我们 split 之后不想要的部分直接丢弃了(一般用下划线来为我们不需要的变量取名)</p>
+<p>实际上，<code>*</code>操作和函数式语言中的列表处理功能相似，相信学过Coursera 华盛顿大学神课<strong>Programming Language</strong>的同学对这一形式一定不会陌生(来源 Reference3):</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sum</span><span class="params">(items)</span>:</span></span><br><span class="line">   head, *tail = items</span><br><span class="line">   <span class="keyword">return</span> head + sum(tail) <span class="keyword">if</span> tail <span class="keyword">else</span> head</span><br></pre></td></tr></table></figure>
+<p>当然，限于Python自身内部对递归的次数限制，这个例子在实践中意义不大，但是它确实是十分精妙，令人不禁击节赞叹！</p>
+<h2 id="其他奇技淫巧"><a href="#其他奇技淫巧" class="headerlink" title="其他奇技淫巧"></a>其他奇技淫巧</h2><p>还有一些我不知道怎么分类的小技术，在这里也一并献给大家(例子来自 Reference 2):</p>
+<h3 id="列表元素快速换位置"><a href="#列表元素快速换位置" class="headerlink" title="列表元素快速换位置"></a>列表元素快速换位置</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sequence = [*sequence[<span class="number">1</span>:], sequence[<span class="number">0</span>]] <span class="comment">#将首个元素换到最后一个</span></span><br></pre></td></tr></table></figure>
+<h3 id="将多个迭代对象转化为-list"><a href="#将多个迭代对象转化为-list" class="headerlink" title="将多个迭代对象转化为 list"></a>将多个迭代对象转化为 list</h3><p>很多时候，我们在使用完一个函数时，他返回的值都是generator 等迭代对象，必须套上一个<code>list()</code>才可以变为列表，如<code>zip()</code>，<code>reversed()</code>等，此时如果每个函数都套上<code>list()</code>则显得不够优雅，更好的方式如下:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">palindromify</span><span class="params">(sequence)</span>:</span> </span><br><span class="line">    <span class="keyword">return</span> list(sequence) + list(reversed(sequence)) <span class="comment">#不够优雅</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">palindromify</span><span class="params">(sequence)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> [*sequence, *reversed(sequence)] <span class="comment"># better</span></span><br></pre></td></tr></table></figure></p>
+<p>同理，多个 list 的拼接也可以如法炮制:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">list_all = [*list1,*list2,*list3,*list4]</span><br></pre></td></tr></table></figure></p>
+<h3 id="字典的合并"><a href="#字典的合并" class="headerlink" title="字典的合并"></a>字典的合并</h3><p>同理，字典的合并用<code>**</code>也是十分方便:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>date_info = &#123;<span class="string">'year'</span>: <span class="string">"2020"</span>, <span class="string">'month'</span>: <span class="string">"01"</span>, <span class="string">'day'</span>: <span class="string">"01"</span>&#125; </span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>track_info = &#123;<span class="string">'artist'</span>: <span class="string">"Beethoven"</span>, <span class="string">'title'</span>: <span class="string">'Symphony No 5'</span>&#125; </span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>all_info = &#123;**date_info, **track_info&#125; </span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>all_info &#123;<span class="string">'year'</span>: <span class="string">'2020'</span>, <span class="string">'month'</span>: <span class="string">'01'</span>, <span class="string">'day'</span>: <span class="string">'01'</span>, <span class="string">'artist'</span>: <span class="string">'Beethoven'</span>, <span class="string">'title'</span>: <span class="string">'Symphony No 5'</span>&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="最后的闲言碎语"><a href="#最后的闲言碎语" class="headerlink" title="最后的闲言碎语"></a>最后的闲言碎语</h2><p>第一次写技术博客，竟然写了三个小时，大概算是涵盖了大部分<code>*</code>的用法，希望这是一个好的开始，也希望所有读者能多提些宝贵意见，谢谢！ 之后我还想补充一下Python中<code>*</code>是如何实现的，不过这个可能得去翻源码才能有所斩获吧！</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
+<li><a href="https://www.programiz.com/python-programming/methods/built-in/zip" target="_blank" rel="noopener">Python Zip()</a></li>
+<li><a href="https://treyhunner.com/2018/10/asterisks-in-python-what-they-are-and-how-to-use-them/" target="_blank" rel="noopener">Asterisks in Python: what they are and how to use them</a></li>
+<li><a href="https://www.amazon.com/Python-Cookbook-Third-David-Beazley/dp/1449340377" target="_blank" rel="noopener">Python Cookbook</a></li>
+<li><a href="https://www.programiz.com/python-programming/args-and-kwargs" target="_blank" rel="noopener">Python *args and **kwargs</a></li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/12/hello-world/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1207,7 +1384,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-count">6</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
